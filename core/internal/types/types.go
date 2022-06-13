@@ -9,3 +9,13 @@ type LoginRequest struct {
 type LoginResponse struct {
 	Token string `json:"token"`
 }
+
+type DetailRequest struct {
+	Identity string `json:"identity"`
+}
+
+type DetailResponse struct {
+	Identity string `json:"identity"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+}
