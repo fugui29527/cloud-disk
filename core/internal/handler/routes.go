@@ -24,6 +24,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/userDetail",
 					Handler: UserDetailHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/refresh/authorization",
+					Handler: RefreshAuthorizationHandler(serverCtx),
+				},
 			}...,
 		),
 	)

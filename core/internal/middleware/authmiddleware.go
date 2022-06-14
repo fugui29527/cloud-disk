@@ -27,13 +27,14 @@ func (m *AuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 		if auth == "" {
 			w.WriteHeader(http.StatusUnauthorized)
 			w.Write([]byte("Unauthorized"))
+			//helper.NewFailResult(helper.FailAuthCode,"")
 			return
 		}
 		//解析token
 		uc, err := helper.AnalyzeToken(auth)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
-			w.Write([]byte("Unauthorized"))
+			w.Write([]byte(err.Error()))
 			return
 		}
 		r.Header.Set("UserId", string(rune(uc.Id)))

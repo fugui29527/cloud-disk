@@ -1,5 +1,5 @@
-@server (
-	middleware :Auth
+@server(
+	middleware : Auth
 )
 service core-api {
 	//登录
@@ -8,6 +8,9 @@ service core-api {
 	//获取用户详情
 	@handler UserDetailHandler
 	post /userDetail (DetailRequest) returns (DetailResponse)
+	//刷新token
+	@handler RefreshAuthorization
+	get /refresh/authorization () returns (RefreshAuthorizationReply)
 }
 
 type LoginRequest {
@@ -28,4 +31,9 @@ type DetailResponse {
 	Identity string `json:"identity"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
+}
+// RefreshAuthorizationReply 刷新token返回数据
+type RefreshAuthorizationReply {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refresh_token"`
 }

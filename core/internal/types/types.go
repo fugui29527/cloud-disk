@@ -20,3 +20,8 @@ type DetailResponse struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 }
+
+type RefreshAuthorizationReply struct {
+	Token        string `json:"token"`
+	RefreshToken string `json:"refresh_token"`
+}
