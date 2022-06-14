@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"cloud-disk/core/define"
 	"cloud-disk/core/helper"
 	"cloud-disk/core/models"
 	"context"
@@ -41,7 +42,7 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginRequest) (resp *helper.Result
 		return
 	}
 
-	token, err := helper.GenerateToken(user.Id, user.Identity, user.Name, 3000)
+	token, err := helper.GenerateToken(user.Id, user.Identity, user.Name, define.TokenExpire)
 	if err != nil {
 		fmt.Println("生成token失败:", err)
 		resp = helper.NewFailResult(helper.FailCode, "生成token失败!")

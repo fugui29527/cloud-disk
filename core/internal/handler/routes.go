@@ -11,17 +11,20 @@ import (
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/userLogin",
-				Handler: UserLoginHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/userDetail",
-				Handler: UserDetailHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Auth},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/userLogin",
+					Handler: UserLoginHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/userDetail",
+					Handler: UserDetailHandler(serverCtx),
+				},
+			}...,
+		),
 	)
 }

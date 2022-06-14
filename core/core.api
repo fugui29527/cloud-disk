@@ -1,3 +1,6 @@
+@server (
+	middleware :Auth
+)
 service core-api {
 	//登录
 	@handler UserLoginHandler
@@ -13,7 +16,8 @@ type LoginRequest {
 }
 
 type LoginResponse {
-	Token string `json:"token"`
+	Token        string `json:"token"`
+	RefreshToken string `json:"refreshToken"`
 }
 
 type DetailRequest {

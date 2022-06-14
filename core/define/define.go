@@ -10,3 +10,5 @@ type UserClaim struct {
 }
 
 var JwtKey = "cloud-disk-key"
+var TokenExpire = 3600
+var RefreshTokenExpire = 7200

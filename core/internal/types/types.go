@@ -7,7 +7,8 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	Token string `json:"token"`
+	Token        string `json:"token"`
+	RefreshToken string `json:"refreshToken"`
 }
 
 type DetailRequest struct {
