@@ -48,7 +48,14 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginRequest) (resp *helper.Result
 		resp = helper.NewFailResult(helper.FailCode, "生成token失败!")
 		return
 	}
+	refreshToken, err := helper.GenerateToken(user.Id, user.Identity, user.Name, define.RefreshTokenExpire)
+	if err != nil {
+		fmt.Println("生成token失败:", err)
+		resp = helper.NewFailResult(helper.FailCode, "生成token失败!")
+		return
+	}
 	loginResponse.Token = token
+	loginResponse.RefreshToken = refreshToken
 	resp = helper.NewSuccessResult(helper.SuccessCode, loginResponse)
 	return
 }

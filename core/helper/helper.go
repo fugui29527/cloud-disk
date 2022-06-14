@@ -34,6 +34,7 @@ func GenerateToken(id int, identity, name string, second int) (string, error) {
 	return tokenString, nil
 }
 
+// AnalyzeToken 解析token
 func AnalyzeToken(token string) (*define.UserClaim, error) {
 	uc := new(define.UserClaim)
 	claims, err := jwt.ParseWithClaims(token, uc, func(token *jwt.Token) (interface{}, error) {

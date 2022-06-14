@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"cloud-disk/core/helper"
 	"github.com/zeromicro/go-zero/core/logx"
 	"net/http"
 )
@@ -28,6 +29,17 @@ func (m *AuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 			w.Write([]byte("Unauthorized"))
 			return
 		}
+		//解析token
+		uc, err := helper.AnalyzeToken(auth)
+		if err != nil {
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Write([]byte("Unauthorized"))
+			return
+		}
+		r.Header.Set("UserId", string(rune(uc.Id)))
+		r.Header.Set("UserIdentity", uc.Identity)
+		r.Header.Set("UserName", uc.Name)
+
 		next(w, r)
 	}
 }
