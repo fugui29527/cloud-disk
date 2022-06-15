@@ -11,6 +11,9 @@ service core-api {
 	//刷新token
 	@handler RefreshAuthorization
 	get /refresh/authorization () returns (RefreshAuthorizationReply)
+	@handler UserRegister
+	get /user/register (UserRegisterRequest) returns ()
+
 }
 
 type LoginRequest {
@@ -37,3 +40,15 @@ type RefreshAuthorizationReply {
 	Token        string `json:"token"`
 	RefreshToken string `json:"refresh_token"`
 }
+
+type UserRegisterRequest {
+	// 用户名
+	Name string `json:"name"`
+	// 密码
+	Password string `json:"password"`
+	// 邮箱
+	Email string `json:"email"`
+	// 验证码
+	Code string `json:"code"`
+}
+
