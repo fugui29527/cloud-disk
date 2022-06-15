@@ -1,54 +1,58 @@
 @server(
-	middleware : Auth
+    middleware : Auth
 )
 service core-api {
-	//登录
-	@handler UserLoginHandler
-	post /userLogin (LoginRequest) returns (LoginResponse)
-	//获取用户详情
-	@handler UserDetailHandler
-	post /userDetail (DetailRequest) returns (DetailResponse)
-	//刷新token
-	@handler RefreshAuthorization
-	get /refresh/authorization () returns (RefreshAuthorizationReply)
-	@handler UserRegister
-	get /user/register (UserRegisterRequest) returns ()
-
+    //登录
+    @handler UserLoginHandler
+    post /userLogin (LoginRequest) returns (Result)
+    //获取用户详情
+    @handler UserDetailHandler
+    post /userDetail (DetailRequest) returns (Result)
+    //刷新token
+    @handler RefreshAuthorization
+    get /refresh/authorization () returns (Result)
+    //用户注册
+    @handler UserRegister
+    get /user/register (UserRegisterRequest) returns (Result)
 }
 
+type Result {
+    Code string `json:"code"`
+    Data interface{} `json:"data"`
+    Msg string `json:"msg"`
+}
 type LoginRequest {
-	Name   string `json:"name"`
-	Passwd string `json:"passwd"`
+    Name string `json:"name"`
+    Passwd string `json:"passwd"`
 }
 
 type LoginResponse {
-	Token        string `json:"token"`
-	RefreshToken string `json:"refreshToken"`
+    Token string `json:"token"`
+    RefreshToken string `json:"refreshToken"`
 }
 
 type DetailRequest {
-	Identity string `json:"identity"`
+    Identity string `json:"identity"`
 }
 
 type DetailResponse {
-	Identity string `json:"identity"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
+    Identity string `json:"identity"`
+    Name string `json:"name"`
+    Email string `json:"email"`
 }
 // RefreshAuthorizationReply 刷新token返回数据
 type RefreshAuthorizationReply {
-	Token        string `json:"token"`
-	RefreshToken string `json:"refresh_token"`
+    Token string `json:"token"`
+    RefreshToken string `json:"refresh_token"`
 }
 
 type UserRegisterRequest {
-	// 用户名
-	Name string `json:"name"`
-	// 密码
-	Password string `json:"password"`
-	// 邮箱
-	Email string `json:"email"`
-	// 验证码
-	Code string `json:"code"`
+    // 用户名
+    Name string `json:"name"`
+    // 密码
+    Password string `json:"password"`
+    // 邮箱
+    Email string `json:"email"`
+    // 验证码
+    Code string `json:"code"`
 }
-

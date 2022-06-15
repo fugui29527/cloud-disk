@@ -1,25 +1,24 @@
 package helper
 
+import "cloud-disk/core/internal/types"
+
 var SuccessCode = "200"
 var FailCode = "9999"
+
+//数据已存在
+var FailDoubleCode = "1001"
 
 //token错误码
 var FailAuthCode = "401"
 
-type Result struct {
-	Code string      `json:"code"`
-	Data interface{} `json:"data"`
-	Msg  string      `json:"msg"`
-}
-
-func NewSuccessResult(code string, data interface{}) *Result {
-	return &Result{
+func NewSuccessResult(code string, data interface{}) *types.Result {
+	return &types.Result{
 		Code: code,
 		Data: data,
 	}
 }
-func NewFailResult(code string, msg string) *Result {
-	return &Result{
+func NewFailResult(code string, msg string) *types.Result {
+	return &types.Result{
 		Code: code,
 		Msg:  msg,
 	}

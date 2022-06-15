@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/golang-jwt/jwt/v4"
+	uuid "github.com/satori/go.uuid"
 	"time"
 )
 
@@ -47,4 +48,8 @@ func AnalyzeToken(token string) (*define.UserClaim, error) {
 		return uc, errors.New("token is invalid")
 	}
 	return uc, err
+}
+
+func UUID() string {
+	return uuid.NewV4().String()
 }

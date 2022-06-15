@@ -27,7 +27,7 @@ func NewUserLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserLog
 	}
 }
 
-func (l *UserLoginLogic) UserLogin(req *types.LoginRequest) (resp *helper.Result, err error) {
+func (l *UserLoginLogic) UserLogin(req *types.LoginRequest) (resp *types.Result, err error) {
 	// todo: add your logic here and delete this line
 	loginResponse := new(types.LoginResponse)
 	user := new(models.UserBasic)

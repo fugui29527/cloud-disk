@@ -24,7 +24,7 @@ func NewRefreshAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContex
 	}
 }
 
-func (l *RefreshAuthorizationLogic) RefreshAuthorization(token string) (resp *helper.Result, err error) {
+func (l *RefreshAuthorizationLogic) RefreshAuthorization(token string) (resp *types.Result, err error) {
 	uc, err := helper.AnalyzeToken(token)
 	if err != nil {
 		resp = helper.NewFailResult(helper.FailAuthCode, err.Error())

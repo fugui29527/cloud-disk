@@ -26,7 +26,7 @@ func NewUserDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserDe
 	}
 }
 
-func (l *UserDetailLogic) UserDetail(req *types.DetailRequest) (resp *helper.Result, err error) {
+func (l *UserDetailLogic) UserDetail(req *types.DetailRequest) (resp *types.Result, err error) {
 	// todo: add your logic here and delete this line
 	user := new(models.UserBasic)
 	ok, err := models.Engine.Where("identity=?", req.Identity).Get(user)
