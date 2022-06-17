@@ -2,25 +2,31 @@ package middleware
 
 import (
 	"cloud-disk/core/helper"
+	"cloud-disk/core/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
 	"net/http"
 )
 
 type AuthMiddleware struct {
+	Config config.Config
 }
 
-func NewAuthMiddleware() *AuthMiddleware {
-	return &AuthMiddleware{}
+func NewAuthMiddleware(c config.Config) *AuthMiddleware {
+	return &AuthMiddleware{
+		Config: c,
+	}
 }
 
 func (m *AuthMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqeustPath := r.RequestURI
 		logx.Infof("请求地址:%s", reqeustPath)
-		if "/userLogin" == reqeustPath {
-			// Passthrough to next handler if need
-			next(w, r)
-			return
+		for _, s := range m.Config.IgnoreUrl {
+			if "/userLogin" == s {
+				// Passthrough to next handler if need
+				next(w, r)
+				return
+			}
 		}
 		auth := r.Header.Get("Authorization")
 		// 为空则返回未授权

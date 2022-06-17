@@ -51,5 +51,6 @@ func (l *UserRegisterLogic) UserRegister(req *types.UserRegisterRequest) (resp *
 		resp = helper.NewFailResult(helper.FailCode, "报错失败!")
 		return
 	}
+	resp = helper.NewSuccessResult(helper.SuccessCode, nil)
 	return
 }

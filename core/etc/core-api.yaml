@@ -2,7 +2,6 @@ Name: core-api
 Host: 0.0.0.0
 Port: 8899
 ##忽略验证的地址
-IgnoreUrl:
-  - /userLogin
+IgnoreUrl: [/userLogin,/user/register]
 Log:
   Mode: console

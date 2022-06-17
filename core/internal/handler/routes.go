@@ -30,7 +30,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Handler: RefreshAuthorizationHandler(serverCtx),
 				},
 				{
-					Method:  http.MethodGet,
+					Method:  http.MethodPost,
 					Path:    "/user/register",
 					Handler: UserRegisterHandler(serverCtx),
 				},
